@@ -9,7 +9,7 @@
     <Grid>
         <Label x:Name="label" Content="Log in" HorizontalAlignment="Left" Margin="129,10,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="nameLoginTextBox" HorizontalAlignment="Left" Height="23" Margin="90,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button x:Name="proceedButton" Content="Proceed" HorizontalAlignment="Left" Margin="115,123,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="proceedButton" Click="proceedButton_Click" Content="Proceed" HorizontalAlignment="Left" Margin="115,123,0,0" VerticalAlignment="Top" Width="75" IsDefault="True"/>
         <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="90,87,0,0" VerticalAlignment="Top" Width="120" Height="23" PasswordChar="*"/>
         <Image x:Name="image" HorizontalAlignment="Left" Height="27" Margin="55,40,0,0" VerticalAlignment="Top" Width="31" Source="/Sourses/avatar2.png"/>
         <Image x:Name="image1" HorizontalAlignment="Left" Height="34" Margin="53,81,0,0" VerticalAlignment="Top" Width="34" Source="/Sourses/tools2.png" RenderTransformOrigin="0.719,0.62"/>

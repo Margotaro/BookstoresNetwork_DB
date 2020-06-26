@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BookStore.Properties;
+using Npgsql;
 
 namespace BookStore
 {
@@ -23,6 +25,19 @@ namespace BookStore
         public MainWindow()
         {
             InitializeComponent();
+        }
+        private void proceedButton_Click(object sender, RoutedEventArgs e)
+        {
+            var info = new OwnerWindow();
+            info.Show();
+            this.Close();
+
+            // deploy first db connection
+            // fetch role
+            // deploy second db connection
+            // init needed dao
+
+            // model loader
         }
     }
 }
