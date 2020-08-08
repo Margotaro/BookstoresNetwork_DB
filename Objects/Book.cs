@@ -3,10 +3,11 @@
     class Book : IPropertyListener, IBook
     {
 
-        public Book(IBookListener listener, string title, string author, string publisher, string language, string genre)
+        public Book(IBookListener listener, Id<IBook> id, string title, string author, string publisher, string language, string genre)
         {
             this.listener = listener;
 
+            _id = new Property<Id<IBook>>(id, this);
             _title = new Property<string>(title, this);
             _author = new Property<string>(author, this);
             _publisher = new Property<string>(publisher, this);
@@ -16,12 +17,17 @@
 
         IBookListener listener;
 
-        public Property<string> _title;
-        public Property<string> _author;
-        public Property<string> _publisher;
-        public Property<string> _language;
-        public Property<string> _genre;
+        Property<Id<IBook>> _id;
+        Property<string> _title;
+        Property<string> _author;
+        Property<string> _publisher;
+        Property<string> _language;
+        Property<string> _genre;
 
+        public Id<IBook> id
+        {
+            get => _id.value;
+        }
         public string title
         {
             get => _title.value;

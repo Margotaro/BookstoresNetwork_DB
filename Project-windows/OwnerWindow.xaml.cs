@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,24 +22,28 @@ namespace BookStore
     /// </summary>
     public partial class OwnerWindow : Window
     {
-        private string _workerName = "not set yet";
-        private string _position = "not set yet";
-        private string _salary = "not set yet";
-        private string _shift = "not set yet";
-        private string _login = "not set yet";
-        private string _password = "not set yet";
         DAO dao;
         WorkerChangeManager changeManager;
         WorkerFactory workerFactory;
+        ObservableCollection<BookstoresListItem> bookstores;
+        ObservableCollection<CatalogueListItem> catalogue;
+        ObservableCollection<StaffListItem> staff;
 
         public OwnerWindow()
         {
             InitializeComponent(); 
             dao = Connect();
             changeManager = new WorkerChangeManager(dao);
-            workerFactory = new WorkerFactory(changeManager);
+            workerFactory = new WorkerFactory(changeManager, dao);
 
-            dao.hui();
+            bookstores = new BookstoresViewList((List<Bookstore>)dao.getAllBookstores()).list;
+            ownerBookstores.ItemsSource = bookstores;
+
+            staff = new StaffViewList((List<Worker>)dao.getAllWorkers()).list;
+            ownerStaff.ItemsSource = staff;
+
+            catalogue = new CatalogueViewList((List<Book>)dao.getCatalogueContents()).list;
+            ownerCatalogue.ItemsSource = catalogue;
         }
         private DAO Connect()
         {
@@ -54,8 +59,6 @@ namespace BookStore
             var name = workerNameTextBox.Text;
             var position = positionTextBox.Text;
             var salary = salaryTextBox.Text;
-
-            var worker1 = workerFactory?.makeModelWorker("qwen", "manager", 100, "first", "irapap", "228");
         }
     }
 }

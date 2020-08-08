@@ -82,68 +82,75 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="App.xaml">
+    <ApplicationDefinition Include="Project-windows\App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Address.cs" />
-    <Compile Include="Book.cs" />
+    <Compile Include="ViewObjects\CatalogueListItem.cs" />
+    <Compile Include="IViewObjects\ICatalogueViewList.cs" />
+    <Compile Include="ViewObjects\BookstoresViewList.cs" />
+    <Compile Include="Factories\BookstoreFactory.cs" />
+    <Compile Include="Objects\Address.cs" />
+    <Compile Include="Objects\Book.cs" />
     <Compile Include="BookChangeManager.cs" />
-    <Compile Include="BookFactory.cs" />
+    <Compile Include="Factories\BookFactory.cs" />
     <Compile Include="BookstoreChangeManager.cs" />
+    <Compile Include="ViewObjects\BookstoresListItem.cs" />
     <Compile Include="DAO.cs" />
-    <Compile Include="IBook.cs" />
+    <Compile Include="IObjects\IBook.cs" />
     <Compile Include="IBookListener.cs" />
-    <Compile Include="IBookstore.cs" />
+    <Compile Include="IObjects\IBookstore.cs" />
     <Compile Include="IBookstoreListener.cs" />
-    <Compile Include="Id.cs" />
+    <Compile Include="Objects\Bookstore.cs" />
+    <Compile Include="Objects\Id.cs" />
     <Compile Include="IDAO.cs" />
-    <Compile Include="IDBObject.cs" />
+    <Compile Include="IObjects\IDBObject.cs" />
     <Compile Include="IPropertyListener.cs" />
-    <Compile Include="IWorker.cs" />
+    <Compile Include="IObjects\IWorker.cs" />
     <Compile Include="IWorkerListener.cs" />
-    <Compile Include="Property.cs" />
+    <Compile Include="Objects\Property.cs" />
     <Compile Include="Registration.cs" />
-    <Compile Include="Telephone.cs" />
-    <Compile Include="ViewFactory.cs" />
-    <Compile Include="Worker.cs" />
+    <Compile Include="Objects\Telephone.cs" />
+    <Compile Include="Factories\ViewFactory.cs" />
+    <Compile Include="Objects\Worker.cs" />
+    <Compile Include="IViewObjects\IBookstoresViewList.cs" />
     <Compile Include="WorkerChangeManager.cs" />
-    <Compile Include="WorkerFactory.cs" />
-    <Compile Include="WorkingHours.cs" />
-    <Page Include="CashierWindow.xaml">
+    <Compile Include="Factories\WorkerFactory.cs" />
+    <Compile Include="Objects\WorkingHours.cs" />
+    <Page Include="Project-windows\CashierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainWindow.xaml">
+    <Page Include="Project-windows\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="App.xaml.cs">
+    <Compile Include="Project-windows\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CashierWindow.xaml.cs">
+    <Compile Include="Project-windows\CashierWindow.xaml.cs">
       <DependentUpon>CashierWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseConnection.cs" />
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Project-windows\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ManagerWindow.xaml">
+    <Page Include="Project-windows\ManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="OwnerWindow.xaml">
+    <Page Include="Project-windows\OwnerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ManagerWindow.xaml.cs">
+    <Compile Include="Project-windows\ManagerWindow.xaml.cs">
       <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OwnerWindow.xaml.cs">
+    <Compile Include="Project-windows\OwnerWindow.xaml.cs">
       <DependentUpon>OwnerWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -170,9 +177,11 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="IObjects\App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Windows\" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Sourses\avatar2.PNG" />
     <Resource Include="Sourses\tools2.PNG" />

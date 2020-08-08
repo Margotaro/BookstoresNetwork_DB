@@ -10,30 +10,36 @@
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792">
             <TabItem Header="Каталог">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="395"/>
+                    <DataGrid x:Name="ownerCatalogue" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="395">
+                        <DataGrid.Columns>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Label x:Name="label" Content="Название" HorizontalAlignment="Left" Margin="420,13,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="488,13,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="488,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label_Copy" Content="Автор" HorizontalAlignment="Left" Margin="422,38,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="488,41,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="488,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label_Copy1" Content="Издатель" HorizontalAlignment="Left" Margin="422,66,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="488,69,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="488,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label_Copy2" Content="Язык" HorizontalAlignment="Left" Margin="422,93,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="488,97,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="488,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label_Copy3" Content="Жанры" HorizontalAlignment="Left" Margin="422,122,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="488,125,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="488,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label_Copy4" Content="Стоимость печатной версии" HorizontalAlignment="Left" Margin="422,150,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Height="23" Margin="593,154,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Height="23" Margin="593,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label_Copy5" Content="Стоимость электронной версии" HorizontalAlignment="Left" Margin="422,178,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy5" HorizontalAlignment="Left" Height="23" Margin="607,182,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="textBox_Copy5" HorizontalAlignment="Left" Height="23" Margin="607,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Button x:Name="button" Content="Добавить книгу" HorizontalAlignment="Left" Margin="422,240,0,0" VerticalAlignment="Top" Width="102"/>
                     <Button x:Name="button_Copy" Content="Удалить книгу" HorizontalAlignment="Left" Margin="420,290,0,0" VerticalAlignment="Top" Width="102"/>
                     <Button x:Name="button_Copy1" Content="Установить скидку на все" HorizontalAlignment="Left" Margin="420,337,0,0" VerticalAlignment="Top" Width="150"/>
-                    <TextBox x:Name="textBox_Copy6" HorizontalAlignment="Left" Height="23" Margin="593,334,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="57"/>
+                    <TextBox x:Name="textBox_Copy6" HorizontalAlignment="Left" Height="23" Margin="593,334,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Сотрудники">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid1" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="355"/>
+                    <DataGrid x:Name="ownerStaff" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="355">
+                        <DataGrid.Columns>
+                        </DataGrid.Columns>
+                    </DataGrid>
                     <Button x:Name="addWorkerButton" Content="Добавить менеджера" Click="addWorkerButton_Click" HorizontalAlignment="Left" Margin="375,342,0,0" VerticalAlignment="Top" Width="141" IsDefault="True"/>
                     <TextBox x:Name="workerNameTextBox" Text="" HorizontalAlignment="Left" Height="23" Margin="500,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label_Copy6" Content="Имя сотрудника:" HorizontalAlignment="Left" Margin="375,51,0,0" VerticalAlignment="Top"/>
@@ -51,7 +57,10 @@
             </TabItem>
             <TabItem Header="Магазины">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid2" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="786"/>
+                    <DataGrid x:Name="ownerBookstores" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="786">
+                        <DataGrid.Columns>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
         </TabControl>

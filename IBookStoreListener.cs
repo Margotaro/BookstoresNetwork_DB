@@ -2,6 +2,6 @@
 
 interface IBookstoreListener
 {
-    Bookstore getBookstore(Id<Bookstore> bookstoreId);
+    Bookstore getBookstore(Id<IBookstore> bookstoreId);
     void bookstoreChanged(Bookstore bookstore);
 }

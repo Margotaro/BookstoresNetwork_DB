@@ -8,7 +8,7 @@
         }
 
         IDAO dao;
-        public Bookstore getBookstore(Id<Bookstore> bookstoreId)
+        public Bookstore getBookstore(Id<IBookstore> bookstoreId)
         {
             return dao.getBookstore(bookstoreId);
         }

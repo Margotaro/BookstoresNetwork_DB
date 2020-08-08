@@ -1,9 +1,4 @@
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.csprojAssemblyReference.cache
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\CashierWindow.g.cs
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\MainWindow.g.cs
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\ManagerWindow.g.cs
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\OwnerWindow.g.cs
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\App.g.cs
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore_MarkupCompile.cache
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore_MarkupCompile.lref
 C:\Users\Kolyan\source\repos\BookStore\bin\Debug\BookStore.exe.config
@@ -30,10 +25,6 @@ C:\Users\Kolyan\source\repos\BookStore\bin\Debug\System.Text.Encodings.Web.xml
 C:\Users\Kolyan\source\repos\BookStore\bin\Debug\System.Text.Json.xml
 C:\Users\Kolyan\source\repos\BookStore\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Kolyan\source\repos\BookStore\bin\Debug\System.ValueTuple.xml
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\CashierWindow.baml
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\MainWindow.baml
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\ManagerWindow.baml
-C:\Users\Kolyan\source\repos\BookStore\obj\Debug\OwnerWindow.baml
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.g.resources
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.Properties.Resources.resources
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.csproj.GenerateResource.cache
@@ -41,3 +32,12 @@ C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.csproj.CoreCompileInp
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.csproj.CopyComplete
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.exe
 C:\Users\Kolyan\source\repos\BookStore\obj\Debug\BookStore.pdb
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\CashierWindow.g.cs
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\MainWindow.g.cs
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\ManagerWindow.g.cs
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\OwnerWindow.g.cs
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\App.g.cs
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\CashierWindow.baml
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\MainWindow.baml
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\ManagerWindow.baml
+C:\Users\Kolyan\source\repos\BookStore\obj\Debug\Project-windows\OwnerWindow.baml

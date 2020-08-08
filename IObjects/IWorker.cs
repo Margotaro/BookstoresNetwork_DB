@@ -7,7 +7,10 @@
         double salary { get; set; }
         WorkingHours hours { get; set; }
         string login { get; set; }
-        string password { get; set; } // int passwordHash?
-        Id<IWorker> id { get; set; } // ????
-    }
+        string password { get; set; } 
+        Id<IWorker> id { get; set; } 
+        Date hiring_date { get; set; }
+        Date dehiring_date { get; set; }
+        Bookstore working_place { get; set; }
+}
 }

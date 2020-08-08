@@ -9,12 +9,12 @@ BookStore
 none
 false
 DEBUG;TRACE
-C:\Users\Kolyan\source\repos\BookStore\App.xaml
-4-1696891586
+C:\Users\Kolyan\source\repos\BookStore\Project-windows\App.xaml
+4-251730151
 
-331930860629
+40-1004376530
 1271255998765
-CashierWindow.xaml;MainWindow.xaml;ManagerWindow.xaml;OwnerWindow.xaml;
+Project-windows\CashierWindow.xaml;Project-windows\MainWindow.xaml;Project-windows\ManagerWindow.xaml;Project-windows\OwnerWindow.xaml;
 
-False
+True
 

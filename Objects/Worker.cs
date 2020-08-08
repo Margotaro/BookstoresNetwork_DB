@@ -1,4 +1,6 @@
-﻿namespace BookStore
+﻿using System.Collections.Generic;
+
+namespace BookStore
 {
     enum Position
     {
@@ -7,7 +9,7 @@
     class Worker : IPropertyListener, IWorker
     {
 
-        public Worker(IWorkerListener listener, string name, Position position, double salary, WorkingHours hours, string login, string password, string id)
+        public Worker(IWorkerListener listener, string name, Position position, double salary, WorkingHours hours, string login, string password, string id, Date hiringdate, Date dehiringdate, Bookstore bookstore)
         {
             this.listener = listener;
 
@@ -18,6 +20,9 @@
             _login = new Property<string>(login, this);
             _password = new Property<string>(password, this);
             _id = new Property<Id<IWorker>>(new Id<IWorker>(id), this);
+            _hiring_date = new Property<Date>(hiringdate, this);
+            _dehiring_date = new Property<Date>(dehiringdate, this);
+            _working_place = new Property<Bookstore>(bookstore, this);
             this.listener.workerCreated(this);
         }
 
@@ -30,6 +35,10 @@
         Property<string> _login;
         Property<string> _password;
         Property<Id<IWorker>> _id;
+        Property<Date> _hiring_date;
+        Property<Date> _dehiring_date;
+        Property<Bookstore> _working_place;
+
         public string name
         {
             get => _name.value;
@@ -66,37 +75,25 @@
             get => _id.value;
             set  => _id.value = value;
         }
+        public Date hiring_date
+        {
+            get => _hiring_date.value;
+            set => _hiring_date.value = value;
+        }
+        public Date dehiring_date
+        {
+            get => _dehiring_date.value;
+            set => _dehiring_date.value = value;
+        }
+        public Bookstore working_place
+        {
+            get => _working_place.value;
+            set => _working_place.value = value;
 
+        }
         public void  propertyChanged()
         {
             listener?.workerChanged(this);
         }
-    }
-    class Bookstore : IBookstore, IPropertyListener
-    {
-
-        public Bookstore(IBookstoreListener listener, Address address, Telephone cashierTelephone, Telephone managertelephone)
-        {
-            this.listener = listener;
-            _address = new Property<Address>(address, this);
-            _cashierTelephone = new Property<Telephone>(cashierTelephone, this);
-            _managertelephone = new Property<Telephone>(managertelephone, this);
-        }
-
-        IBookstoreListener listener;
-
-        Property<Address> _address;
-        Property<Telephone> _cashierTelephone;
-        Property<Telephone> _managertelephone;
-        Property<Id<IBookstore>> _id;
-        public Address address {  get;  }
-        public Telephone cashierTelephone { get; }
-        public Telephone managerTelephone { get; }
-        public Id<IBookstore> id { get; }
-        public void propertyChanged()
-        {
-            listener?.bookstoreChanged(this);
-        }
-    }
-    
+    }    
 }

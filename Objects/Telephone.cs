@@ -24,4 +24,8 @@ class Telephone
             _telephonenumber = value; 
         }
     }
+    public override string ToString()
+    {
+        return _telephonenumber;
+    }
 }

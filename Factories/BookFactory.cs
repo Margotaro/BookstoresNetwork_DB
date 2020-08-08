@@ -10,9 +10,9 @@
 
         BookChangeManager changeManager;
 
-        public IBook makeBook(string title, string author, string publisher, string language, string genre)
+        public IBook makeBook(string id, string title, string author, string publisher, string language, string genre)
         {
-            return new Book(changeManager, title, author, publisher, language, genre);
+            return new Book(changeManager, new Id<IBook>(id), title, author, publisher, language, genre);
         }
 
     }
