@@ -5,59 +5,79 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookStore"
         mc:Ignorable="d"
-        Title="OwnerWindow" Height="450" Width="800">
+        Title="OwnerWindow" Height="643" Width="945">
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="612" VerticalAlignment="Top" Width="937">
             <TabItem Header="Каталог">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="ownerCatalogue" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="395">
+                    <DataGrid x:Name="ownerCatalogue" HorizontalAlignment="Left" Height="584" VerticalAlignment="Top" Width="526">
                         <DataGrid.Columns>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Label x:Name="label" Content="Название" HorizontalAlignment="Left" Margin="420,13,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="488,13,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy" Content="Автор" HorizontalAlignment="Left" Margin="422,38,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="488,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy1" Content="Издатель" HorizontalAlignment="Left" Margin="422,66,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="488,69,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy2" Content="Язык" HorizontalAlignment="Left" Margin="422,93,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="488,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy3" Content="Жанры" HorizontalAlignment="Left" Margin="422,122,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="488,125,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy4" Content="Стоимость печатной версии" HorizontalAlignment="Left" Margin="422,150,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Height="23" Margin="593,154,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy5" Content="Стоимость электронной версии" HorizontalAlignment="Left" Margin="422,178,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy5" HorizontalAlignment="Left" Height="23" Margin="607,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                    <Button x:Name="button" Content="Добавить книгу" HorizontalAlignment="Left" Margin="422,240,0,0" VerticalAlignment="Top" Width="102"/>
-                    <Button x:Name="button_Copy" Content="Удалить книгу" HorizontalAlignment="Left" Margin="420,290,0,0" VerticalAlignment="Top" Width="102"/>
-                    <Button x:Name="button_Copy1" Content="Установить скидку на все" HorizontalAlignment="Left" Margin="420,337,0,0" VerticalAlignment="Top" Width="150"/>
-                    <TextBox x:Name="textBox_Copy6" HorizontalAlignment="Left" Height="23" Margin="593,334,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57"/>
+                    <Label x:Name="label" Content="Название" HorizontalAlignment="Left" Margin="558,25,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="titleTextBox" HorizontalAlignment="Left" Height="23" Margin="626,25,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="label_Copy" Content="Автор" HorizontalAlignment="Left" Margin="560,50,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="authorTextBox" HorizontalAlignment="Left" Height="23" Margin="626,53,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="label_Copy1" Content="Издатель" HorizontalAlignment="Left" Margin="560,78,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="publisherTextBox" HorizontalAlignment="Left" Height="23" Margin="626,81,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="label_Copy2" Content="Язык" HorizontalAlignment="Left" Margin="560,105,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy3" Content="Жанры" HorizontalAlignment="Left" Margin="558,145,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy4" Content="Оптовая стоимость печатной версии" HorizontalAlignment="Left" Margin="549,264,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="wholesalePrintedVersionCostTextBox" HorizontalAlignment="Left" Height="23" Margin="790,265,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="DecimalNumberValidationTextBox"/>
+                    <Label x:Name="label_Copy5" Content="Стоимость электронной версии" HorizontalAlignment="Left" Margin="549,406,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="electronicVersionCostTextBox" HorizontalAlignment="Left" Height="23" Margin="790,406,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="DecimalNumberValidationTextBox"/>
+                    <Button x:Name="addBookButton" Content="Добавить книгу" HorizontalAlignment="Left" Margin="549,497,0,0" VerticalAlignment="Top" Width="102" Click="addBookButton_Click"/>
+                    <Button x:Name="deleteButton" Content="Удалить книгу" HorizontalAlignment="Left" Margin="549,522,0,0" VerticalAlignment="Top" Width="102" Click="deleteButton_Click"/>
+                    <Button x:Name="saleButton" Content="Установить скидку на все" HorizontalAlignment="Left" Margin="549,547,0,0" VerticalAlignment="Top" Width="150"/>
+                    <TextBox x:Name="discountTextBox" HorizontalAlignment="Left" Height="23" Margin="722,544,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="57" PreviewTextInput="percentValidationTextBox"/>
+                    <ComboBox x:Name="languageComboBox" HorizontalAlignment="Left" Margin="626,109,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ListBox x:Name="selectedGenresListBox" HorizontalAlignment="Left" Height="73" Margin="762,145,0,0" VerticalAlignment="Top" Width="152" SelectionMode="Multiple" Background="Transparent" BorderBrush="Transparent" SelectionChanged="selectedGenresListBox_SelectionChanged">
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Background" Value="Blue"/>
+                            <Setter Property="Opacity" Value="0.5"/>
+                            <Setter Property="Margin" Value="1" />
+                        </Style>
+                    </ListBox>
+                    <ComboBox x:Name="genreSelectComboBox" HorizontalAlignment="Left" Margin="626,149,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="genreSelectComboBox_SelectionChanged"/>
+                    <Label x:Name="label_Copy13" Content="Розничная стоимость печатной версии" HorizontalAlignment="Left" Margin="549,290,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="retailPrintedVersionCostTextBox" HorizontalAlignment="Left" Height="23" Margin="790,293,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="DecimalNumberValidationTextBox"/>
+                    <Label x:Name="label_Copy14" Content="Количество единиц на складе" HorizontalAlignment="Left" Margin="549,318,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="warehouseQuantityPrintedVersionTextBox" HorizontalAlignment="Left" Height="23" Margin="790,321,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" PreviewTextInput="WholeNumberValidationTextBox"/>
+                    <Label x:Name="label_Copy15" Content="Расположение pdf-версии в системе" HorizontalAlignment="Left" Margin="549,434,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="electronicVersionPDFRouteTextBox" HorizontalAlignment="Left" Height="23" Margin="790,434,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="label1" Content="Информация о печатной версии" HorizontalAlignment="Left" Margin="626,218,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label1_Copy" Content="Информация о электронной версии" HorizontalAlignment="Left" Margin="616,366,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Сотрудники">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="ownerStaff" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="355">
+                    <DataGrid x:Name="ownerStaff" HorizontalAlignment="Left" Height="584" VerticalAlignment="Top" Width="477">
                         <DataGrid.Columns>
                         </DataGrid.Columns>
                     </DataGrid>
-                    <Button x:Name="addWorkerButton" Content="Добавить менеджера" Click="addWorkerButton_Click" HorizontalAlignment="Left" Margin="375,342,0,0" VerticalAlignment="Top" Width="141" IsDefault="True"/>
-                    <TextBox x:Name="workerNameTextBox" Text="" HorizontalAlignment="Left" Height="23" Margin="500,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy6" Content="Имя сотрудника:" HorizontalAlignment="Left" Margin="375,51,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label_Copy7" Content="Должность:" HorizontalAlignment="Left" Margin="375,95,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label_Copy8" Content="Зарплата:" HorizontalAlignment="Left" Margin="375,138,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label_Copy9" Content="Смена:" HorizontalAlignment="Left" Margin="375,183,0,0" VerticalAlignment="Top"/>
-                    <Label x:Name="label_Copy10" Content="Логин:" HorizontalAlignment="Left" Margin="377,232,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="positionTextBox" Text="{Binding Path=__position}" HorizontalAlignment="Left" Height="23" Margin="500,95,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="salaryTextBox" Text="{Binding Path=_salary}" HorizontalAlignment="Left" Height="23" Margin="500,141,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="shiftTextBox" Text="{Binding Path=_shift}" HorizontalAlignment="Left" Height="23" Margin="500,186,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="loginTextBox" Text="{Binding Path=_login}" HorizontalAlignment="Left" Height="23" Margin="500,235,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label x:Name="label_Copy11" Content="Пароль:" HorizontalAlignment="Left" Margin="375,277,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="passwordTextBox" Text="{Binding Path=_password}" HorizontalAlignment="Left" Height="23" Margin="500,280,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="addWorkerButton" Content="Добавить менеджера" Click="addWorkerButton_Click" HorizontalAlignment="Left" Margin="513,336,0,0" VerticalAlignment="Top" Width="141" IsDefault="True"/>
+                    <TextBox x:Name="workerNameTextBox" Text="" HorizontalAlignment="Left" Height="23" Margin="638,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="label_Copy6" Content="Имя сотрудника:" HorizontalAlignment="Left" Margin="513,10,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy7" Content="Дата найма:" HorizontalAlignment="Left" Margin="513,54,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy8" Content="Зарплата:" HorizontalAlignment="Left" Margin="513,97,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy9" Content="Смена:" HorizontalAlignment="Left" Margin="513,142,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy10" Content="Место работы:" HorizontalAlignment="Left" Margin="515,191,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="salaryTextBox" Text="{Binding Path=_salary}" HorizontalAlignment="Left" Height="23" Margin="638,100,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="label_Copy11" Content="Логин:" HorizontalAlignment="Left" Margin="513,236,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="usernameTextBox" Text="{Binding Path=_password}" HorizontalAlignment="Left" Height="23" Margin="638,239,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label x:Name="label_Copy12" Content="Пароль:" HorizontalAlignment="Left" Margin="513,281,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="passwordTextBox" Text="{Binding _password}" HorizontalAlignment="Left" Height="23" Margin="638,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <DatePicker x:Name="hiringDatePicker" HorizontalAlignment="Left" Margin="638,56,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="shiftComboBox" HorizontalAlignment="Left" Margin="638,146,0,0" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="workplaceComboBox" HorizontalAlignment="Left" Margin="638,195,0,0" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="fireWorkerButton" Content="Уволить менеджера" Click="fireWorkerButton_Click" HorizontalAlignment="Left" Margin="513,400,0,0" VerticalAlignment="Top" Width="141" IsDefault="True"/>
+                    <DatePicker x:Name="firingDatePicker" HorizontalAlignment="Left" Margin="792,396,0,0" VerticalAlignment="Top"/>
+                    <Label x:Name="label_Copy16" Content="Дата увольнения:" HorizontalAlignment="Left" Margin="681,394,0,0" VerticalAlignment="Top"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Магазины">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="ownerBookstores" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="786">
+                    <DataGrid x:Name="ownerBookstores" HorizontalAlignment="Left" Height="584" VerticalAlignment="Top" Width="931">
                         <DataGrid.Columns>
                         </DataGrid.Columns>
                     </DataGrid>

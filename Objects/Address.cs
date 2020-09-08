@@ -1,4 +1,4 @@
-﻿class Address
+﻿public class Address
 {
     public Address(string city, string street, int houseNumber)
     {

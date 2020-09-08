@@ -2,14 +2,14 @@
 
 namespace BookStore
 {
-    enum Position
+    public enum Position
     {
-        cashier, manager
+        cashier, manager, deliverer
     }
-    class Worker : IPropertyListener, IWorker
+    public class Worker : IPropertyListener, IWorker
     {
 
-        public Worker(IWorkerListener listener, string name, Position position, double salary, WorkingHours hours, string login, string password, string id, Date hiringdate, Date dehiringdate, Bookstore bookstore)
+        public Worker(IWorkerListener listener, string name, Position position, double salary, WorkingHours hours, string login, string password, string id, DateTime hiringdate, DateTime dehiringdate, Bookstore bookstore)
         {
             this.listener = listener;
 
@@ -20,10 +20,10 @@ namespace BookStore
             _login = new Property<string>(login, this);
             _password = new Property<string>(password, this);
             _id = new Property<Id<IWorker>>(new Id<IWorker>(id), this);
-            _hiring_date = new Property<Date>(hiringdate, this);
-            _dehiring_date = new Property<Date>(dehiringdate, this);
+            _hiring_date = new Property<DateTime>(hiringdate, this);
+            _dehiring_date = new Property<DateTime>(dehiringdate, this);
             _working_place = new Property<Bookstore>(bookstore, this);
-            this.listener.workerCreated(this);
+            //this.listener.workerCreated(this);
         }
 
         IWorkerListener listener;
@@ -35,8 +35,8 @@ namespace BookStore
         Property<string> _login;
         Property<string> _password;
         Property<Id<IWorker>> _id;
-        Property<Date> _hiring_date;
-        Property<Date> _dehiring_date;
+        Property<DateTime> _hiring_date;
+        Property<DateTime> _dehiring_date;
         Property<Bookstore> _working_place;
 
         public string name
@@ -75,12 +75,12 @@ namespace BookStore
             get => _id.value;
             set  => _id.value = value;
         }
-        public Date hiring_date
+        public DateTime hiring_date
         {
             get => _hiring_date.value;
             set => _hiring_date.value = value;
         }
-        public Date dehiring_date
+        public DateTime dehiring_date
         {
             get => _dehiring_date.value;
             set => _dehiring_date.value = value;

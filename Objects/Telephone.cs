@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.RegularExpressions;
 
-class Telephone
+public class Telephone
 {
     public Telephone(string number)
     {

@@ -1,6 +1,6 @@
 ﻿using BookStore;
 
-interface IBookstoreListener
+public interface IBookstoreListener
 {
     Bookstore getBookstore(Id<IBookstore> bookstoreId);
     void bookstoreChanged(Bookstore bookstore);

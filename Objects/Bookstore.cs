@@ -1,6 +1,6 @@
 ﻿namespace BookStore
 {
-    class Bookstore : IBookstore, IPropertyListener
+    public class Bookstore : IBookstore, IPropertyListener
     {
 
         public Bookstore(IBookstoreListener listener, Id<IBookstore> id, Address address, Telephone cashierTelephone, Telephone managertelephone)

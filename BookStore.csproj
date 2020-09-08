@@ -86,6 +86,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BookViewModel.cs" />
+    <Compile Include="IBookstoreWindow.cs" />
+    <Compile Include="Objects\Date.cs" />
     <Compile Include="ViewObjects\CatalogueListItem.cs" />
     <Compile Include="IViewObjects\ICatalogueViewList.cs" />
     <Compile Include="ViewObjects\BookstoresViewList.cs" />
@@ -114,9 +117,13 @@
     <Compile Include="Factories\ViewFactory.cs" />
     <Compile Include="Objects\Worker.cs" />
     <Compile Include="IViewObjects\IBookstoresViewList.cs" />
+    <Compile Include="ViewObjects\CatalogueViewList.cs" />
+    <Compile Include="ViewObjects\StaffListItem.cs" />
+    <Compile Include="ViewObjects\StaffViewList.cs" />
     <Compile Include="WorkerChangeManager.cs" />
     <Compile Include="Factories\WorkerFactory.cs" />
     <Compile Include="Objects\WorkingHours.cs" />
+    <Compile Include="WorkerViewModel.cs" />
     <Page Include="Project-windows\CashierWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

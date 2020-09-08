@@ -1,8 +1,12 @@
-﻿namespace BookStore
+﻿using System.Collections;
+using System.Collections.Generic;
+
+namespace BookStore
 {
-    interface IBookListener
+    public interface IBookListener
     {
         void bookChanged(Book book);
-        // make any messages here
+        void bookCreated(BookViewModel book);
+        IEnumerable<Book> bookBeingSearched(string title, string author, string publisher, string language, IEnumerable genres);
     }
 }

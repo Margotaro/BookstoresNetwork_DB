@@ -17,25 +17,3 @@ class BookstoresViewList
         }
     }
 }
-
-class StaffViewList
-{
-    public ObservableCollection<StaffListItem> list { get; set; }
-    public StaffViewList(List<Worker> staff)
-    {
-        list = new ObservableCollection<StaffListItem>();
-        foreach(var worker in staff)
-        {
-            list.Add(new StaffListItem(
-                worker.id.ToString(),
-                worker.name.ToString(),
-                worker.hir.ToString(),//hiringdate
-                worker.id.ToString(),//
-                worker.position.ToString(),
-                worker.salary.ToString(),
-                worker.hours.ToString(),
-                worker..ToString()
-                ));
-        }
-    }
-}

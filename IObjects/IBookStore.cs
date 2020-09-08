@@ -1,6 +1,6 @@
 ﻿using BookStore;
 
-interface IBookstore
+public interface IBookstore
 {
     Address address { get; }
     Telephone cashierTelephone { get; }

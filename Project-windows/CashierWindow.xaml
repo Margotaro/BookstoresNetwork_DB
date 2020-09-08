@@ -5,22 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookStore"
         mc:Ignorable="d"
-        Title="CashierWindow" Height="450" Width="475.847">
+        Title="CashierWindow" Height="450" Width="740.727">
     <Grid>
-        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="792">
+        <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="733">
             <TabItem Header="Каталог">
                 <Grid Background="#FFE5E5E5" Margin="0,-3,0,0">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125*"/>
-                        <ColumnDefinition Width="661*"/>
+                        <ColumnDefinition Width="0*"/>
+                        <ColumnDefinition/>
                     </Grid.ColumnDefinitions>
-                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="394" VerticalAlignment="Top" Width="291" Grid.ColumnSpan="2"/>
-                    <Label x:Name="label" Content="Найти книгу в сети:" HorizontalAlignment="Left" Margin="182,19,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                    <TextBox x:Name="textBox1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="182,50,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <DataGrid x:Name="cashierCatalogue" HorizontalAlignment="Left" Height="394" VerticalAlignment="Top" Width="291" Grid.ColumnSpan="2"/>
+                    <Label x:Name="label" Content="Найти книгу в сети:" HorizontalAlignment="Left" Margin="319,19,0,0" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="116"/>
+                    <Button x:Name="findBook" Content="Найти" Grid.Column="1" HorizontalAlignment="Left" Margin="319,245,0,0" VerticalAlignment="Top" Width="75" Height="20" Click="findBookButton_Click"/>
+                    <Label x:Name="label_Copy" Content="Название" HorizontalAlignment="Left" Margin="320,52,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="titleTextBox" HorizontalAlignment="Left" Height="23" Margin="388,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+                    <Label x:Name="label_Copy1" Content="Автор" HorizontalAlignment="Left" Margin="322,77,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="authorTextBox" HorizontalAlignment="Left" Height="23" Margin="388,80,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+                    <Label x:Name="label_Copy2" Content="Издатель" HorizontalAlignment="Left" Margin="322,105,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="publisherTextBox" HorizontalAlignment="Left" Height="23" Margin="388,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+                    <Label x:Name="label_Copy3" Content="Язык" HorizontalAlignment="Left" Margin="322,132,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <Label x:Name="label_Copy4" Content="Жанры" HorizontalAlignment="Left" Margin="320,172,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2"/>
+                    <ComboBox x:Name="languageComboBox" HorizontalAlignment="Left" Margin="388,136,0,0" VerticalAlignment="Top" Width="120" Grid.ColumnSpan="2"/>
+                    <ListBox x:Name="selectedGenresListBox" HorizontalAlignment="Left" Height="73" Margin="524,172,0,0" VerticalAlignment="Top" Width="152" SelectionMode="Multiple" Background="Transparent" BorderBrush="Transparent" SelectionChanged="selectedGenresListBox_SelectionChanged" Grid.ColumnSpan="2">
+                        <Style TargetType="{x:Type ListBoxItem}">
+                            <Setter Property="Background" Value="Blue"/>
+                            <Setter Property="Opacity" Value="0.5"/>
+                            <Setter Property="Margin" Value="1" />
+                        </Style>
+                    </ListBox>
+                    <ComboBox x:Name="genreSelectComboBox" HorizontalAlignment="Left" Margin="388,176,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="genreSelectComboBox_SelectionChanged" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Оформить покупку книги">
-                <Grid Background="#FFE5E5E5" Margin="0,-2,0,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-2,-2,0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="206*"/>
                         <RowDefinition Height="187*"/>
@@ -39,7 +56,7 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Оформить возврат книги">
-                <Grid Background="#FFE5E5E5" Margin="0,-3,320,0">
+                <Grid Background="#FFE5E5E5" Margin="0,-3,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="0*"/>

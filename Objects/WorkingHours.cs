@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BookStore
 {
-    sealed class WorkingHours
+    public sealed class WorkingHours
     {
         public WorkingHours(string shiftname, TimeSpan start_of_the_shift, TimeSpan end_of_the_shift)
         {

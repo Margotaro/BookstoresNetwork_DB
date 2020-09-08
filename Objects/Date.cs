@@ -7,7 +7,7 @@
     public string ShiftID { get; set; }
     public string BookstoreID { get; set; }
      */
-class Date
+public class DateTime
 {
     int _year;
     int _month;
@@ -17,7 +17,7 @@ class Date
         get => _year;
         set 
         { 
-            if(value < 0 || value >= DateTime.Now.Year)
+            if(value < 0 || value > System.DateTime.Now.Year)
             { 
                 throw new Exception("Year is not correct"); 
             }
@@ -29,9 +29,9 @@ class Date
         get => _month;
         set
         {
-            if (value < 1 || value >= DateTime.Now.Month)
+            if (value < 0 || value >= 13)
             {
-                throw new Exception("Month is not correct");
+                  throw new Exception("Month is not correct");
             }
             _month = value;
         }
@@ -41,14 +41,19 @@ class Date
         get => _day;
         set
         {
-            if (value < 1 || value >= DateTime.Now.Day)
+            if (value < 1 || value >= 30)
             {
-                throw new Exception("Day is not correct");
+                if(this.Month == 2)
+                    throw new Exception("Exceeded maximum date of February");
+                if(value == 31 && (this.Month == 1 || this.Month == 2 || this.Month == 4 || this.Month == 6 || this.Month == 9 || this.Month == 11))
+                    throw new Exception("Exceeded maximum date of 30-day month");
+                if(value > 31)
+                    throw new Exception("Exceeded maximum possible date");
             }
             _day = value;
         }
     }
-    public Date(int year, int month, int day)
+    public DateTime(int year, int month, int day)
     {
         Year = year;
         Month = month;
