@@ -28,7 +28,7 @@ namespace BookStore
         }
         private void proceedButton_Click(object sender, RoutedEventArgs e)
         {
-            var info = new CashierWindow();
+            var info = new ManagerWindow();
             info.Show();
             this.Close();
 

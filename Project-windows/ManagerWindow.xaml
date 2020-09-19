@@ -6,32 +6,42 @@
         xmlns:local="clr-namespace:BookStore"
         mc:Ignorable="d"
         Title="ManagerWindow" Height="450" Width="497.204">
+    <Window.Resources>
+        <Style  TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Content.Text, RelativeSource={RelativeSource Self}}"  Value="" >
+                    <Setter Property="Background" Value="LightGreen"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
     <Grid>
         <TabControl x:Name="tabControl" HorizontalAlignment="Left" Height="419" VerticalAlignment="Top" Width="489">
             <TabItem Header="Сотрудники магазина">
                 <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="dataGrid" HorizontalAlignment="Left" Height="391" VerticalAlignment="Top" Width="314"/>
-                    <Button x:Name="button" Content="Сохранить &#xD;&#xA;изменения" HorizontalAlignment="Left" Margin="328,10,0,0" VerticalAlignment="Top" Width="75" Height="42"/>
-                    <Button x:Name="button_Copy" Content="Создать &#xD;&#xA;зарплатную &#xD;&#xA;ведосомсть" HorizontalAlignment="Left" Margin="328,74,0,0" VerticalAlignment="Top" Width="75" Height="57"/>
-                    <Button x:Name="button_Copy1" Content="Уволить &#xD;&#xA;сотрудника" HorizontalAlignment="Left" Margin="328,338,0,0" VerticalAlignment="Top" Width="75" Height="43"/>
+                    <DataGrid x:Name="managerSubordinatesDataGrid" RowEditEnding="managerSubordinatesDataGrid_RowEditEnding" HorizontalAlignment="Left" Height="368" VerticalAlignment="Top" Width="314"/>
+                    <Button x:Name="saveChangesButton" Content="Сохранить &#xD;&#xA;изменения" HorizontalAlignment="Left" Margin="328,10,0,0" VerticalAlignment="Top" Width="75" Height="42" Click="saveChangesButton_Click"/>
+                    <Button x:Name="createPayrollButton" Content="Создать &#xD;&#xA;зарплатную &#xD;&#xA;ведосомсть" HorizontalAlignment="Left" Margin="328,74,0,0" VerticalAlignment="Top" Width="75" Height="57"/>
+                    <Button x:Name="fireWorkerButton" Content="Уволить &#xD;&#xA;сотрудника" HorizontalAlignment="Left" Margin="328,338,0,0" VerticalAlignment="Top" Width="75" Height="43"/>
                     <Label x:Name="label1" Content="Выберите сотрудника &#xD;&#xA;из списка перед &#xD;&#xA;удалением" HorizontalAlignment="Left" Margin="328,266,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="refreshButton" Click="refreshButton_Click" Content="Refresh" HorizontalAlignment="Left" Margin="0,368,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Создать аккаунт сотрудника">
                 <Grid Background="#FFE5E5E5">
-                    <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="135,26,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="workerNameTextBox" HorizontalAlignment="Left" Height="23" Margin="135,26,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
                     <Label x:Name="label" Content="Имя сотрудника:" HorizontalAlignment="Left" Margin="10,26,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label_Copy" Content="Должность:" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label_Copy1" Content="Зарплата:" HorizontalAlignment="Left" Margin="10,113,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label_Copy2" Content="Смена:" HorizontalAlignment="Left" Margin="10,158,0,0" VerticalAlignment="Top"/>
                     <Label x:Name="label_Copy3" Content="Логин:" HorizontalAlignment="Left" Margin="12,207,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="135,70,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="135,116,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="135,161,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="135,210,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-                    <Button x:Name="button1" Content="Нанять" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Width="75"/>
+                    <TextBox x:Name="salaryTextBox" HorizontalAlignment="Left" Height="23" Margin="135,116,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="loginTextBox" HorizontalAlignment="Left" Height="23" Margin="135,210,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <Button x:Name="hireButton" Content="Нанять" HorizontalAlignment="Left" Margin="10,304,0,0" VerticalAlignment="Top" Width="75" Click="hireButton_Click"/>
                     <Label x:Name="label_Copy4" Content="Пароль:" HorizontalAlignment="Left" Margin="10,252,0,0" VerticalAlignment="Top"/>
-                    <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Height="23" Margin="135,255,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+                    <TextBox x:Name="passwordTextBox" HorizontalAlignment="Left" Height="23" Margin="135,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                    <ComboBox x:Name="shiftComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="135,162,0,0"/>
+                    <ComboBox x:Name="positionComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="135,70,0,0"/>
                 </Grid>
             </TabItem>
         </TabControl>

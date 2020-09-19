@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
+using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading;
 using System.Windows;
@@ -18,6 +19,8 @@ namespace BookStore
         private static Dictionary<Id<IBookstore>, Bookstore> cachedBookstores;
         private static Dictionary<Id<IWorker>, Worker> cachedWorkers;
         private static Dictionary<Id<IBook>, Book> cachedBooks;
+
+        private static Dictionary<Id<IBookstore>, List<Tuple<Id<IBook>, int>>> cachedAvailableBooksInBookstore;
 
         public List<Bookstore> CachedBookstores 
         { 
@@ -41,6 +44,36 @@ namespace BookStore
             }
         }
 
+        public Dictionary<Id<IBookstore>, List<Tuple<Id<IBook>, int>>> CachedAvailableBooksInBookstore
+        {
+            get
+            {
+                return cachedAvailableBooksInBookstore;
+            }
+        }
+
+        public Dictionary<Id<IBook>, List<Tuple<Id<IBookstore>, int>>> CachedBookstoresOnBooksAvailability
+        {
+            get
+            {
+                var dict_converted = new Dictionary<Id<IBook>, List<Tuple<Id<IBookstore>, int>>>();
+                foreach (var entry in cachedAvailableBooksInBookstore)
+                {
+                    foreach (var t_book_q in entry.Value)
+                    {
+                        if (dict_converted.ContainsKey(t_book_q.Item1))
+                        {
+                            dict_converted[t_book_q.Item1].Add(new Tuple<Id<IBookstore>, int>(entry.Key, t_book_q.Item2));
+                        }
+                        else
+                        {
+                            dict_converted.Add(t_book_q.Item1, new List<Tuple<Id<IBookstore>, int>> { new Tuple<Id<IBookstore>, int>(entry.Key, t_book_q.Item2) });
+                        }
+                    }
+                }
+                return dict_converted;
+            }
+        }
         private DatabaseConnection _sqlconnection;
         private WorkerFactory workerFactory;
         private WorkerChangeManager workerChangeManager;
@@ -60,6 +93,11 @@ namespace BookStore
             workerFactory = new WorkerFactory(workerChangeManager, this);
             bookstoreFactory = new BookstoreFactory(bookstoreChangeManager);
             bookFactory = new BookFactory(bookChangeManager);
+
+            cachedAvailableBooksInBookstore = new Dictionary<Id<IBookstore>, List<Tuple<Id<IBook>, int>>>();
+            getAllBookstores();
+            getAllWorkers();
+            getCatalogueContents();
         }
 
         //GET
@@ -97,6 +135,7 @@ namespace BookStore
             }
             reader.Close();
             cachedBooks = bookList.ToDictionary(x => x.id, x => x);
+            updateCataloguePerBookstoreDictionary();
             return bookList;
         }
         public IEnumerable<Bookstore> getAllBookstores()
@@ -205,26 +244,75 @@ namespace BookStore
             cachedBookstores[bookstoreId] = bookstore;
             return bookstore;
         }
+        private void updateCataloguePerBookstoreDictionary()
+        {
+            var queryString = @"SELECT BOOKSTORES.BOOKSTORE_ID, ARRAY_AGG(BOOKS_FOR_SALE.BOOK_ID || ', ' ||BOOKS_FOR_SALE.QUANTITY)  FROM BOOKS
+                                JOIN PRINTED_BOOKS
+                                ON BOOKS.BOOK_ID = PRINTED_BOOKS.BOOK_ID
+                                JOIN BOOKS_FOR_SALE
+                                ON PRINTED_BOOKS.BOOK_ID = BOOKS_FOR_SALE.BOOK_ID
+                                JOIN BOOKSTORES
+                                ON BOOKSTORES.BOOKSTORE_ID = BOOKS_FOR_SALE.BOOKSTORE_ID
+                                WHERE BOOKS_FOR_SALE.QUANTITY != 0
+                                GROUP BY BOOKSTORES.BOOKSTORE_ID";
 
+            var command = new NpgsqlCommand(queryString, _sqlconnection.CreateConnection.Connection);
+            var reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                cachedAvailableBooksInBookstore = new Dictionary<Id<IBookstore>, List<Tuple<Id<IBook>, int>>>();
+            }
+            foreach (var entry in reader)
+            {
+                var item = reader["array_agg"] as IEnumerable<string>;
+                int count = 0;
+                foreach(var i in item)
+                {
+                    count += 1;
+                }
+                if(count > 0)
+                {
+                    var list_tuple = new List<Tuple<Id<IBook>, int>>();
+                    foreach(var raw_string_bookid_quantity in item)
+                    {
+                        var string_bookid_quantity = raw_string_bookid_quantity.Split(',').ToList();
+                        list_tuple.Add(new Tuple<Id<IBook>, int>(new Id<IBook>(string_bookid_quantity.ElementAt(0)), Convert.ToInt32(string_bookid_quantity.ElementAt(1))));
+                    }
+                    var _t = new Id<IBookstore>(reader["bookstore_id"].ToString());
+                    if(cachedAvailableBooksInBookstore.ContainsKey(_t))
+                    {
+                        foreach(var element in list_tuple)
+                        {
+                            cachedAvailableBooksInBookstore[_t].Add(element);
+                        }
+                    }
+                    else
+                    {
+                        cachedAvailableBooksInBookstore.Add(new Id<IBookstore>(reader["bookstore_id"].ToString()), list_tuple);
+                    }
+                    
+                }
+            }
+
+            reader.Close();
+        }
 
         //UPDATE
-        public void updateWorker(Worker worker)
+        public void updateWorker(Worker worker_update)
         {
-            string name = worker.name;
-            string id = worker.id.huelue;
-            string salary = (worker.salary).ToString("F2");
-            string position = ((Position)worker.position).ToString();
-            string login = worker.login;
-            string hours = worker.hours.shiftname;
-
-            throw new NotImplementedException();
-            string QueryString = "not implemented yet";
-            //string QueryString = "UPDATE staff SET staff.employee_id = " + id + ", staff.full_name = " + name + ", staff." + "CURRENT_DATE,NULL," + position + "," + salary + "," + hours + "," + "1);";
-            sendRequest(QueryString);
+            var queryString = @"UPDATE staff 
+                                SET full_name = '" + worker_update.name + "', " +
+                                   "job_type = '" + worker_update.position.ToString() + "', " +
+                                   "salary = '" + worker_update.salary.ToString() + "', " +
+                                   "shift_id = '" + worker_update.hours.shiftname + "' " +
+                                "WHERE staff.employee_id = " + worker_update.id.ToString();
+            sendRequest(queryString);
+            getAllWorkers();
         }
         public void updateBook(Book book)
         {
 
+            updateCataloguePerBookstoreDictionary();
         }
 
 
@@ -311,6 +399,51 @@ namespace BookStore
                 sendRequest(queryString);
             }
             cachedBooks.Add(book_id, (Book)bookFactory.makeBook(book_id.ToString(), title, author, publisher, language, genres, _electronic_ver_cost, electronic_ver_storage_route, _retail_printed_ver_cost, _wholesail_printed_ver_cost, _warehouse_printed_ver_quantity));
+            updateCataloguePerBookstoreDictionary();
+        }
+        public Id<IReceipt> purchaseBooks(List<PurchaseParameters> list_of_books_to_purchase)
+        {
+            try
+            {
+                var receipt_id = new Id<IReceipt>("-1");
+                if (list_of_books_to_purchase.Count == 1)
+                {
+                    receipt_id = purchaseSingleBook(list_of_books_to_purchase[0]);
+                }
+                else
+                {
+                    receipt_id = purchaseSingleBook(list_of_books_to_purchase[0]);
+                    for (var i = 1; i < list_of_books_to_purchase.Count; i++)
+                    {
+                        purchaseSingleBook(list_of_books_to_purchase[i], receipt_id);
+                    }
+                }
+                return receipt_id;
+            }
+            catch(NpgsqlException ex)
+            {
+                throw new Exception("bruh");
+            }
+        }
+        private Id<IReceipt> purchaseSingleBook(PurchaseParameters purchaseParameters, Id<IReceipt> receipt_number_id = null)
+        {
+            var queryString = @"SELECT insert_data_function(" + purchaseParameters.cashier_id.ToString() + ", " +
+                                                     purchaseParameters.bookstore_id.ToString() + ", " +
+                                                     purchaseParameters.book_id.ToString() + ", " + 
+                                                     "'" + purchaseParameters.type_of_the_book + "', " +
+                                                     purchaseParameters.quantity.ToString();
+            if(receipt_number_id != null)
+            {
+                queryString += ", " + receipt_number_id.ToString();
+            }
+            queryString += ")";
+            var command = new NpgsqlCommand(queryString, _sqlconnection.CreateConnection.Connection);
+            var reader = command.ExecuteReader();
+            reader.Read();
+            var receipt_id = new Id<IReceipt>(reader["insert_data_function"].ToString());
+            reader.Close();
+            updateCataloguePerBookstoreDictionary();
+            return receipt_id;
         }
         //DELETE
         public void deleteBook(Id<IBook> book_id)
@@ -318,18 +451,24 @@ namespace BookStore
             var queryString = "delete from books where book_id = " + book_id.ToString();
             sendRequest(queryString);
             cachedBooks.Remove(book_id);
+            updateCataloguePerBookstoreDictionary();
         }
-
+        public void returnBooks(Id<IBook> book_id, int quantity, Id<IReceipt> receipt_id, string book_type)
+        {
+                var queryString = @"CALL return_book(" + receipt_id.ToString() + ", " + book_id.ToString() + ", " + quantity.ToString() + ", '" + book_type + "')";
+                sendRequest(queryString);
+                updateCataloguePerBookstoreDictionary();
+        }
         //MODIFICATION
         public void fireWorker(Id<IWorker> worker_id, DateTime firingDate)
         {
-            var queryString = "update staff set dehiring_date = " + "\'" + firingDate.Year.ToString() + "-" + firingDate.Month.ToString() + "-" + firingDate.Day.ToString() + "\'" + " where employee_id = " + worker_id.ToString();
+            var queryString = @"update staff set dehiring_date = " + "\'" + firingDate.Year.ToString() + "-" + firingDate.Month.ToString() + "-" + firingDate.Day.ToString() + "\'" + 
+                               " where employee_id = " + worker_id.ToString();
             sendRequest(queryString);
             var tempRecachedWorkers = getAllWorkers();
         }
-
         //SELECTION
-        public IEnumerable<Book> findBooks(string title, string author, string publisher, string language, IEnumerable<string> genres)
+        public IEnumerable<Book> findBooks(string title, string author, string publisher, string language, IEnumerable genres)
         {
             var bookList = new List<Book>();
 
@@ -338,7 +477,13 @@ namespace BookStore
                                 ON BOOKS.BOOK_ID = PRINTED_BOOKS.BOOK_ID
                                 LEFT JOIN ELECTRONIC_BOOKS
                                 ON BOOKS.BOOK_ID = ELECTRONIC_BOOKS.BOOK_ID";
-            if(title != "" || author != "" || publisher != "" || language != "" || genres.Count() > 0)
+            var gencount = 0;
+            genres = genres == null ? new List<string>() : genres;
+            foreach (var t in genres)
+            {
+                gencount += 1;
+            }
+            if(title != "" || author != "" || publisher != "" || language != "" || gencount > 0)
             {
                 var isAndNeeded = false;
                 queryString += " WHERE ";
@@ -348,16 +493,16 @@ namespace BookStore
                         queryString += " AND ";
                     else
                         isAndNeeded = true;
-                    queryString += " BOOKS.TITLE ILIKE " + "'" + title + "'";//ILIKE - ignoring case (lower upper) operator
+                    queryString += " BOOKS.TITLE ILIKE " + "'%" + title + "%'";//ILIKE - ignoring case (lower upper) operator
                 }
-                if(genres.Count() > 0)
+                if(gencount > 0)
                 {
                     if (isAndNeeded)
                         queryString += " AND ";
                     else
                         isAndNeeded = true;
                     var querygenre = convertListToGenresQuery(genres);
-                    queryString += " BOOKS.GENRES @> " + querygenre + " AND BOOKS.GENRES @> " + querygenre;
+                    queryString += " BOOKS.GENRES @> " + querygenre;
                 }
                 if(author != "")
                 {
@@ -365,7 +510,7 @@ namespace BookStore
                         queryString += " AND ";
                     else
                         isAndNeeded = true;
-                    queryString += " BOOKS.AUTHOR ILIKE " + "'" + author + "'";
+                    queryString += " BOOKS.AUTHOR ILIKE " + "'%" + author + "%'";
                 }
                 if (publisher != "")
                 {
@@ -373,7 +518,7 @@ namespace BookStore
                         queryString += " AND ";
                     else
                         isAndNeeded = true;
-                    queryString += " BOOKS.PUBLISHER ILIKE " + "'" + publisher + "'";
+                    queryString += " BOOKS.PUBLISHER ILIKE " + "'%" + publisher + "%'";
                 }
                 if (language != "")
                 {
@@ -381,7 +526,7 @@ namespace BookStore
                         queryString += " AND ";
                     else
                         isAndNeeded = true;
-                    queryString += " BOOKS.LANGUAGE ILIKE " + "'" + language + "'";
+                    queryString += " BOOKS.LANG ILIKE " + "'" + language + "'";
                 }
             }
             else
@@ -434,7 +579,10 @@ namespace BookStore
             reader.Close();
             return book_id;
         }
+        private void UpdateData()//call when db data changes 
+        {
 
+        }
         public IEnumerable<string> uploadGenres()
         {
             var queryString = "SELECT enum_range(NULL::genre)";
@@ -453,7 +601,7 @@ namespace BookStore
                 throw new Exception("Books db are empty");
             }
         }
-        string convertListToGenresQuery(IEnumerable<string> list)
+        string convertListToGenresQuery(IEnumerable list)
         {
             var _genres = new List<string>();
             foreach (var gen in list)
@@ -461,7 +609,7 @@ namespace BookStore
                 _genres.Add("'" + gen.ToString() + "'");
             }
             var arrayGenresString = String.Join(", ", _genres);
-            return arrayGenresString;
+            return "ARRAY[" + arrayGenresString + "]::genre[]";
         }
         private void sendRequest(string querystring)
         {
@@ -491,6 +639,22 @@ namespace BookStore
             databaseConnection.OpenConnection();
             return databaseConnection;
         }
+    }
+    public class PurchaseParameters
+    {
+        public PurchaseParameters(Id<IWorker> cashier_id, Id<IBookstore> bookstore_id, Id<IBook> book_id, string type_of_the_book, int quantity)
+        {
+            this.cashier_id = cashier_id;
+            this.bookstore_id = bookstore_id;
+            this.book_id = book_id;
+            this.type_of_the_book = type_of_the_book;
+            this.quantity = quantity;
+        }
+        public Id<IWorker> cashier_id;
+        public Id<IBookstore> bookstore_id;
+        public Id<IBook> book_id;
+        public string type_of_the_book;
+        public int quantity;
     }
 
 }

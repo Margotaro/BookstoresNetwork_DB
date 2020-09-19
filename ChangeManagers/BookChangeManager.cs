@@ -32,7 +32,7 @@ namespace BookStore
                            bvM.retail_printed_ver_cost, bvM.wholesail_printed_ver_cost, bvM.warehouse_printed_ver_quantity);
             window.dataGridBookUpdate();
         }
-        public IEnumerable<Book> bookBeingSearched(string title, string author, string publisher, string language, IEnumerable<string> genres)
+        public IEnumerable<Book> bookBeingSearched(string title, string author, string publisher, string language = "", IEnumerable genres = null)
         {
             var found_books = dao.findBooks(title, author, publisher, language, genres);
             window.dataGridBookUpdate();

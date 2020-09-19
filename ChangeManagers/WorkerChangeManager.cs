@@ -19,6 +19,7 @@ namespace BookStore
         public void workerChanged(Worker worker)
         {
             dao.updateWorker(worker);
+            window.dataGridWorkerUpdate();
         }
         public void workerCreated(WorkerViewModel wvModel)
         {

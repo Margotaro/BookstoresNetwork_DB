@@ -45,7 +45,7 @@ namespace BookStore
             staff = new StaffViewList((List<Worker>)dao.getAllWorkers()).list;
             ownerStaff.ItemsSource = staff;
 
-            catalogue = new CatalogueViewList((List<Book>)dao.getCatalogueContents()).list;
+            catalogue = new CatalogueViewList((List<Book>)dao.getCatalogueContents(), (List<Bookstore>)dao.getAllBookstores(), dao.CachedBookstoresOnBooksAvailability).list;
             ownerCatalogue.ItemsSource = catalogue;
 
             //staff window
@@ -65,7 +65,7 @@ namespace BookStore
         }
         public void dataGridBookUpdate()
         {
-            ownerCatalogue.ItemsSource = new CatalogueViewList(dao.CachedBooks).list; 
+            ownerCatalogue.ItemsSource = new CatalogueViewList(dao.CachedBooks, dao.CachedBookstores, dao.CachedBookstoresOnBooksAvailability).list; 
         }
 
         private void addWorkerButton_Click(object sender, RoutedEventArgs e)

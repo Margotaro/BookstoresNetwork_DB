@@ -27,5 +27,4 @@
             listener?.bookstoreChanged(this);
         }
     }
-    
 }
